@@ -23,7 +23,7 @@ class StockListViewModel {
 
     private let financeService: FinanceServiceProtocol
     internal let modelContext: ModelContext
-    private var currentTrackedStocks: [TrackedStock] = [] // Keep track of fetched objects
+    internal var currentTrackedStocks: [TrackedStock] = [] // Keep track of fetched objects
 
     /// Initializer
     init(modelContext: ModelContext, financeService: FinanceServiceProtocol = YahooFinanceService()) {
