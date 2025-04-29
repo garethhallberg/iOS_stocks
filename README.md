@@ -31,3 +31,56 @@ The architecture is designed with testability and future expansion in mind, feat
 * **IDE:** Xcode 16+
 
 ## Project Structure
+
+```bash
+    StockTracker/                  # Main App Target Folder
+│
+├── StockTrackerApp.swift      # App entry point & SwiftData setup
+├── Assets.xcassets          # App icons, images
+├── Preview Content          # Assets for Xcode Previews
+│
+├── Models/                  # Data structures group
+│   ├── TrackedStock.swift   # SwiftData @Model class (Symbol, TargetProportion)
+│   └── StockQuote.swift     # Struct for fetched quote data
+│
+├── Views/                   # SwiftUI Views group
+│   ├── ContentView.swift    # Main container view
+│   ├── StockRow.swift       # View for a single stock row + slider
+│   ├── PortfolioPieChartView.swift # Pie chart view
+│   └── PortfolioHeaderViewPro.swift # Header with value display/input
+│
+├── ViewModels/              # Observable classes group
+│   └── StockListViewModel.swift # Handles data fetching, calculations, persistence actions
+│
+└── Services/                # External interaction group
+    ├── FinanceServiceProtocol.swift # Defines data fetching contract
+    └── YahooFinanceService.swift    # Current implementation using SwiftYFinance
+
+StockTrackerTests/             # Unit Test Target Folder
+│
+├── StockListViewModelTests.swift # Tests for the ViewModel
+│
+└── Mocks/                   # Mock implementations group
+    └── MockFinanceService.swift # Mock Finance Service
+```
+## Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd <repository-directory>
+    ```
+2.  **Open in Xcode:** Open the `.xcodeproj` file in Xcode 16 or later.
+3.  **Fetch Packages:** Xcode should automatically resolve and fetch the Swift Package dependencies (SwiftYFinance). If not, go to File > Packages > Resolve Package Versions.
+4.  **Build & Run:** Select a simulator or a physical device running iOS 17.0+ and run the app (Cmd+R).
+
+## Future Enhancements
+
+* **Backend API Integration:** Replace `YahooFinanceService` with `BackendAPIService` to fetch data from a custom cloud API.
+* **LLM Analysis:** Integrate with a backend service that uses an LLM to provide daily reports or insights based on portfolio data.
+* **User Authentication:** Secure user data.
+* **Cloud Sync:** Sync portfolio data across user devices (potentially via CloudKit integration with SwiftData).
+* **Improved Error Handling:** Display user-friendly alerts for API errors or data issues.
+* **Historical Data & Charts:** Add line charts to visualize stock price history.
+* **More Robust Allocation:** Add warnings or constraints if total allocation doesn't equal 100%.
+
